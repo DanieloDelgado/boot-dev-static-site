@@ -26,7 +26,7 @@ def block_to_block_type(block: str) -> BlockType:
         return BlockType.heading
     elif block.startswith('```') and block.endswith('```'):
         return BlockType.code
-    elif all(line.strip().startswith('> ') for line in block.splitlines()):
+    elif all(line.strip().startswith('>') for line in block.splitlines()):
         return BlockType.quote
     elif all(line.strip().startswith('- ') for line in block.splitlines()):
         return BlockType.unordered_list
@@ -50,7 +50,7 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
             pre_node = ParentNode(tag="pre", props=None, children=[code_node])
             html_node.children.append(pre_node)
         elif block_type == BlockType.quote:
-            content = ' '.join(line.removeprefix('> ').strip() for line in block.splitlines())
+            content = ' '.join(line.removeprefix('>').strip() for line in block.splitlines())
             children_nodes = text_to_children(content)
             blockquote_node = ParentNode(tag="blockquote", props=None, children=children_nodes)
             html_node.children.append(blockquote_node)
@@ -76,7 +76,3 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
             ordered_list_node = ParentNode(tag="ol", props=None, children=list_items)
             html_node.children.append(ordered_list_node)
     return html_node
-
-
-
-

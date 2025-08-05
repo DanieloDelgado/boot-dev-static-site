@@ -1,4 +1,5 @@
-from gen_static_site.md_blocks import markdown_to_blocks, block_to_block_type, BlockType, markdown_to_html_node
+from gen_static_site.md_blocks import (markdown_to_blocks, block_to_block_type, BlockType, markdown_to_html_node)
+
 
 class TestMarkdownToBlocks:
     def test_markdown_to_blocks(self):
